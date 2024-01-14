@@ -17,12 +17,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
+import { NavbarComponent } from './navbar/navbar.component';
+import { LoginComponent } from './login/login.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, AddComponent, UpdateComponent, DeleteComponent
+    AppComponent, HomeComponent, AddComponent, UpdateComponent, DeleteComponent, NavbarComponent, LoginComponent
   ],
   imports: [
     BrowserModule, MatDialogTitle, MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,ReactiveFormsModule,MatSelectModule,

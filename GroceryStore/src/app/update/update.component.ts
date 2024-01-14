@@ -36,7 +36,7 @@ export class UpdateComponent implements OnInit {
   }
 
   onSave() {
-    if (this.editForm.valid) {
+    if (this.editForm && this.editForm.valid) {
       const updatedGroceryData = {
         groceryName: this.editForm.value.groceryName,
         costPerItem: this.editForm.value.costPerItem,
