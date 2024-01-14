@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Edit Grocery</h2>
+
+<div mat-dialog-content>
+  <form [formGroup]="editForm">
+    <mat-form-field>
+      <mat-label>Grocery Name</mat-label>
+      <input matInput formControlName="groceryName" placeholder="Grocery Name">
+    </mat-form-field>
+<br>
+    <mat-form-field>
+      <mat-label>Cost Per Item</mat-label>
+      <input matInput formControlName="costPerItem" placeholder="Cost Per Item">
+    </mat-form-field>
+    <form [formGroup]="groceryAmounts">
+      <mat-form-field>
+        <mat-label>Items Available</mat-label>
+        <input matInput formControlName="itemsAvailable"
+          placeholder="Items Available">
+      </mat-form-field>
+    </form>
+    <form [formGroup]="grocerySource">
+      <mat-form-field>
+        <mat-label>Select State</mat-label>
+        <mat-select formControlName="stateName" placeholder="State">
+          <mat-option *ngFor="let state of states" [value]="state.stateName">
+            {{ state.stateName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="onCancel()">Cancel</button>
+  <button mat-button color="primary" (click)="onSave()">Add</button>
+</div>

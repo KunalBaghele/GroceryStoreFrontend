@@ -1,0 +1,16 @@
+.grocery-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.grocery-card {
+  margin-bottom: 20px;
+}
+
+mat-card{
+  width: 200px;
+  align-items: center;
+}
+/* mat-card-title{
+} */
