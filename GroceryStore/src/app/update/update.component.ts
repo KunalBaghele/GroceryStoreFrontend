@@ -1,7 +1,7 @@
 import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Grocery } from '../grocery';
 
 
@@ -15,6 +15,7 @@ export class UpdateComponent implements OnInit {
   groceryAmounts!: FormGroup;
   grocerySource!: FormGroup;
   states: any[] = [];
+  groceries: any[] = [];
 
   constructor(
     private dialogRef: MatDialogRef<UpdateComponent>,
@@ -24,12 +25,21 @@ export class UpdateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.editForm = this.fb.group({
-      groceryName: [this.data.groceryName, Validators.required],
-      costPerItem: [this.data.costPerItem, Validators.required],
-      itemsAvailable: [this.data.groceryAmounts.itemsAvailable, Validators.required],
-      stateName: [this.data.grocerySource.stateName, Validators.required],
+    const id = this.data.groceryId;
+    this.editForm = new FormGroup({
+      groceryName: new FormControl(),
+      costPerItem: new FormControl()
     });
+
+    this.groceryAmounts = new FormGroup({
+      itemsAvailable: new FormControl(),
+
+    });
+    this.grocerySource = new FormGroup({
+      stateName: new FormControl(),
+
+    });
+
     this.grocery.getAvailableStates().subscribe((states) => {
       this.states = states;
     });
@@ -41,10 +51,10 @@ export class UpdateComponent implements OnInit {
         groceryName: this.editForm.value.groceryName,
         costPerItem: this.editForm.value.costPerItem,
         groceryAmounts: {
-          itemsAvailable: this.editForm.value.itemsAvailable,
+          itemsAvailable: this.groceryAmounts.value.itemsAvailable,
         },
         grocerySource: {
-          stateName: this.editForm.value.stateName,
+          stateName: this.grocerySource.value.stateName,
         },
       };
 
@@ -56,5 +66,16 @@ export class UpdateComponent implements OnInit {
 
   onCancel() {
     this.dialogRef.close();
+  }
+
+  fetchGroceries(): void {
+    this.grocery.getGroceries().subscribe(
+      (data) => {
+        this.groceries = data;
+      },
+      (error) => {
+        console.error('Error fetching groceries', error);
+      }
+    );
   }
 }

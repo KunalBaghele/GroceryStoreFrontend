@@ -4,7 +4,7 @@
 <div class="container">
   <div *ngFor="let grocery of groceries" class="grocery-card">
     <mat-card>
-      <mat-card-title>{{ grocery.groceryName }}</mat-card-title><hr>
+      <mat-card-title>{{grocery.groceryId}}.{{ grocery.groceryName }}</mat-card-title><hr>
       <mat-card-content>
         <p>Cost Per Item: {{ grocery.costPerItem }}</p>
         <p>Items Available: {{ grocery.groceryAmounts.itemsAvailable }}</p>
@@ -12,7 +12,7 @@
         <p>Source: {{ grocery.grocerySource.stateName }}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button color="primary" (click)="openEditDialog(grocery)">Edit</button>
+        <button mat-button color="primary" (click)="openEditDialog(groceryId,grocery)">Edit</button>
         <button mat-button color="warn" (click)="openDeleteDialog(grocery)">Delete</button>
       </mat-card-actions>
     </mat-card>

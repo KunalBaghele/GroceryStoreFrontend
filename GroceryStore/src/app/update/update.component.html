@@ -4,7 +4,7 @@
   <form [formGroup]="editForm">
     <mat-form-field>
       <mat-label>Grocery Name</mat-label>
-      <input matInput formControlName="groceryName" placeholder="Grocery Name">
+      <input matInput formControlName="groceryName" placeholder={{data.groceryName}}>
     </mat-form-field>
   <br>
     <mat-form-field>

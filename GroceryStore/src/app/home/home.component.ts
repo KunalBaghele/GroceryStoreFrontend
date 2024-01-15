@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteComponent } from '../delete/delete.component';
 import { UpdateComponent } from '../update/update.component';
@@ -17,7 +16,8 @@ export class HomeComponent {
   editDialogOpen = false;
   deleteDialogOpen = false;
   editFormData: any = {};
-  constructor(private grocery: Grocery, private dialog: MatDialog) {}
+  groceryId!:number;
+  constructor(private grocery: Grocery,private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.fetchGroceries();
@@ -34,10 +34,10 @@ export class HomeComponent {
     );
   }
 
-  openEditDialog(grocery: any) {
+  openEditDialog(groceryId:number,grocery: any) {
     const dialogRef = this.dialog.open(UpdateComponent, {
       width: '400px',
-      data: { grocery }
+      data: { grocery,groceryId }
     });
 
     dialogRef.afterClosed().subscribe(result => {

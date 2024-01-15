@@ -9,18 +9,23 @@ import { Observable } from 'rxjs';
 export class Grocery {
   private apiUrl = 'http://localhost:8080/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getGroceries(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/groceries`);
   }
 
+  getGroceryById(id:number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/groceries/${id}`);
+  }
+
+
   addGrocery(groceryData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/groceries`, groceryData);
   }
 
-  updateGrocery(id: number,groceryData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/groceries`, groceryData);
+  updateGrocery(id: number, groceryData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/groceries/${id}`, groceryData);
   }
 
   deleteGrocery(id: number): Observable<void> {
@@ -28,8 +33,8 @@ export class Grocery {
     return this.http.delete<void>(url, { responseType: 'text' as 'json' });
   }
   getAvailableStates(): Observable<any[]> {
-const data=this.http.get<any[]>(`${this.apiUrl}/sources/states`);
-// console.log(data);
+    const data = this.http.get<any[]>(`${this.apiUrl}/sources/states`);
+    // console.log(data);
     return data;
   }
 }
