@@ -1,36 +1,43 @@
-<h2 mat-dialog-title>Edit Grocery</h2>
-
+<h2 mat-dialog-title>Edit Grocery : {{this.editForm.value.groceryName}}</h2>
 <div mat-dialog-content>
   <form [formGroup]="editForm">
     <mat-form-field>
       <mat-label>Grocery Name</mat-label>
-      <input matInput formControlName="groceryName" placeholder={{data.groceryName}}>
+      <input matInput formControlName="groceryName" placeholder="Grocery Name">
     </mat-form-field>
-  <br>
+    <br>
     <mat-form-field>
       <mat-label>Cost Per Item</mat-label>
       <input matInput formControlName="costPerItem" placeholder="Cost Per Item">
     </mat-form-field>
-    <form [formGroup]="groceryAmounts">
+    <br>
+    <mat-form-field>
+      <mat-label>Grocery Type</mat-label>
+      <input matInput formControlName="groceryType" placeholder="Grocery Type">
+    </mat-form-field>
+
+    <div formGroupName="groceryAmounts">
       <mat-form-field>
         <mat-label>Items Available</mat-label>
         <input matInput formControlName="itemsAvailable"
           placeholder="Items Available">
       </mat-form-field>
-    </form>
-    <form [formGroup]="grocerySource">
+    </div>
+
+    <div formGroupName="grocerySource">
       <mat-form-field>
         <mat-label>Select State</mat-label>
-        <mat-select formControlName="stateName" placeholder="State">
-          <mat-option *ngFor="let state of states" [value]="state.stateName">
+        <mat-select formControlName="sourceId" placeholder="State">
+          <mat-option *ngFor="let state of states" [value]="state.sourceId">
             {{ state.stateName }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </form>
+    </div>
+
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button color="warn" (click)="onCancel()">Cancel</button>
-  <button mat-button color="primary" (click)="onSave()">Add</button>
+  <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSave()">Update</button>
 </div>

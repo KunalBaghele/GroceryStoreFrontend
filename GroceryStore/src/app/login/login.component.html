@@ -1,1 +1,24 @@
-<p>login works!</p>
+
+<div class="login-container">
+  <mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="login()" class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="example@gmail.com" [(ngModel)]="email" name="email" required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+        </mat-form-field>
+
+       <div>
+        <button mat-raised-button color="primary" type="submit">Login</button>
+       </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+<router-outlet></router-outlet>

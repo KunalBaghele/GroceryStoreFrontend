@@ -19,19 +19,21 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
+import {MatIconModule} from '@angular/material/icon';
+import { DetailsComponent } from './details/details.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, AddComponent, UpdateComponent, DeleteComponent, NavbarComponent, LoginComponent
+    AppComponent, HomeComponent, AddComponent, UpdateComponent, DeleteComponent, NavbarComponent, LoginComponent, DetailsComponent
   ],
   imports: [
     BrowserModule, MatDialogTitle, MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,ReactiveFormsModule,MatSelectModule,
-    AppRoutingModule, HttpClientModule, BrowserAnimationsModule, MatDialogActions, MatDialogClose, MatDialogContent,MatInputModule
+    AppRoutingModule, HttpClientModule, BrowserAnimationsModule, MatDialogActions, MatDialogClose, MatDialogContent,MatInputModule,MatIconModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
   ],
   bootstrap: [AppComponent]
 })

@@ -34,3 +34,10 @@ hr{
   font-weight: 300;
   width: 170px;
 }
+
+.search{
+  display: flex;
+  position: absolute;
+  right: 10px;
+  top: 50px;
+}

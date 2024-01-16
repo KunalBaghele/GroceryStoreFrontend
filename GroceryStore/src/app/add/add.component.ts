@@ -35,6 +35,7 @@ export class AddComponent implements OnInit {
     this.groceryForm = this.fb.group({
       groceryName: ['', Validators.required],
       costPerItem: ['', Validators.required],
+      groceryType: ['', Validators.required],
       groceryAmounts: this.groceryAmounts,
       grocerySource: this.grocerySource,
     });

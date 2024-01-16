@@ -10,12 +10,15 @@ import { Grocery } from '../grocery';
   templateUrl: './update.component.html',
   styleUrl: './update.component.css'
 })
+
 export class UpdateComponent implements OnInit {
   editForm!: FormGroup;
   groceryAmounts!: FormGroup;
   grocerySource!: FormGroup;
   states: any[] = [];
   groceries: any[] = [];
+  item:any;
+  src:any;
 
   constructor(
     private dialogRef: MatDialogRef<UpdateComponent>,
@@ -25,42 +28,76 @@ export class UpdateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const id = this.data.groceryId;
-    this.editForm = new FormGroup({
-      groceryName: new FormControl(),
-      costPerItem: new FormControl()
-    });
+    // console.log(this.data);
+    this.editForm= new FormGroup({
+      groceryName: new FormControl(this.data.data.groceryName,Validators.required),
+      costPerItem: new FormControl(this.data.data.costPerItem,Validators.required),
+      groceryType: new FormControl(this.data.data.groceryType,Validators.required),
+      groceryAmounts:new FormGroup( {
 
-    this.groceryAmounts = new FormGroup({
-      itemsAvailable: new FormControl(),
+        itemsAvailable:new FormControl(this.data.data.groceryAmounts.itemsAvailable,Validators.required)
 
+      }),
+      grocerySource: new FormGroup({
+        sourceId:new FormControl(this.data.data.grocerySource.sourceId,Validators.required),
+      }),
     });
-    this.grocerySource = new FormGroup({
-      stateName: new FormControl(),
+    // this.editForm = new FormGroup({
+    //   groceryName: new FormControl('', Validators.required),
+    //   costPerItem: new FormControl('', Validators.required),
+    //   groceryType: new FormControl('', Validators.required)
+    // });
 
-    });
+    // this.groceryAmounts = new FormGroup({
+    //   itemsAvailable: new FormControl('', Validators.required),
+
+    // });
+    // this.grocerySource = new FormGroup({
+    //   sourceId: new FormControl('', Validators.required)
+    // });
+
+    // if (this.inputData.id > 0) {
+    //   this.setFormData(this.inputData.id);
+    // }
 
     this.grocery.getAvailableStates().subscribe((states) => {
       this.states = states;
     });
   }
 
+  // setFormData(id: any) {
+  //   this.grocery.getGroceryById(id).subscribe(() => {
+  //     this.inputData = this.data;
+  //     this.editForm.setValue({
+  //       groceryName: this.inputData.groceryName,
+  //     })
+  //   })
+  // }
+
   onSave() {
+     this.item=this.editForm.get('groceryAmounts');
+     this.src=this.editForm.get('grocerySource');
     if (this.editForm && this.editForm.valid) {
       const updatedGroceryData = {
         groceryName: this.editForm.value.groceryName,
         costPerItem: this.editForm.value.costPerItem,
+        groceryType: this.editForm.value.groceryType,
         groceryAmounts: {
-          itemsAvailable: this.groceryAmounts.value.itemsAvailable,
+
+          itemsAvailable: this.item.value.itemsAvailable,
         },
         grocerySource: {
-          stateName: this.grocerySource.value.stateName,
+          sourceId: this.src.value.sourceId,
         },
       };
-
-      this.grocery.updateGrocery(this.data.id, updatedGroceryData).subscribe(() => {
-        this.dialogRef.close(true);
-      });
+      if (this.data.id) {
+        this.grocery.updateGrocery(this.data.id, updatedGroceryData).subscribe(() => {
+          this.dialogRef.close(true);
+          this.grocery.getGroceries();
+        });
+      } else {
+        console.error('Invalid ID:', this.data.id);
+      }
     }
   }
 

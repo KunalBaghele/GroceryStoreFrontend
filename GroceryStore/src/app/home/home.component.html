@@ -1,30 +1,33 @@
-
 <button mat-raised-button color="primary" (click)="openAddDialog()">Add Grocery</button>
+<div class="search">
+  <mat-form-field class="example-full-width">
+    <span matPrefix> </span>
+    <input type="tel" matInput placeholder="Search" name="search"
+      [(ngModel)]="search">
+    <button matSuffix mat-button><mat-icon>search</mat-icon></button>
+  </mat-form-field>
+</div>
 
 <div class="container">
   <div *ngFor="let grocery of groceries" class="grocery-card">
     <mat-card>
-      <mat-card-title>{{grocery.groceryId}}.{{ grocery.groceryName }}</mat-card-title><hr>
+      <mat-card-title>{{grocery.groceryId}}.{{ grocery.groceryName
+        }}</mat-card-title><hr>
       <mat-card-content>
         <p>Cost Per Item: {{ grocery.costPerItem }}</p>
         <p>Items Available: {{ grocery.groceryAmounts.itemsAvailable }}</p>
-        <p>Total Cost: {{ grocery.groceryAmounts.totalCostOfItems }}</p>
+        <!-- <p>Total Cost: {{ grocery.groceryAmounts.totalCostOfItems }}</p> -->
+        <p>Grocery Type: {{ grocery.groceryType }}</p>
         <p>Source: {{ grocery.grocerySource.stateName }}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button color="primary" (click)="openEditDialog(groceryId,grocery)">Edit</button>
-        <button mat-button color="warn" (click)="openDeleteDialog(grocery)">Delete</button>
+        <button mat-icon-button color="primary"
+          (click)="openEditDialog(grocery.groceryId,grocery)"><mat-icon>update</mat-icon></button>
+        <button mat-icon-button color="warn"
+          (click)="openDeleteDialog(grocery)"><mat-icon>delete</mat-icon></button>
+        <button mat-icon-button color="accent"
+          (click)="openDetailsDialog(grocery.groceryId,grocery)"><mat-icon>visibility</mat-icon></button>
       </mat-card-actions>
     </mat-card>
   </div>
 </div>
-
-<mat-dialog-actions *ngIf="editDialogOpen">
-  <button mat-button color="primary" >Update</button>
-  <button mat-button color="warn" (click)="closeEditDialog()">Cancel</button>
-</mat-dialog-actions>
-
-<mat-dialog-actions *ngIf="deleteDialogOpen">
-  <button mat-button color="warn" >Delete</button>
-  <button mat-button color="primary" (click)="closeDeleteDialog()">Cancel</button>
-</mat-dialog-actions>

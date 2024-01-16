@@ -4,6 +4,8 @@ import { DeleteComponent } from '../delete/delete.component';
 import { UpdateComponent } from '../update/update.component';
 import { AddComponent } from '../add/add.component';
 import { Grocery } from '../grocery';
+import { DetailsComponent } from '../details/details.component';
+
 
 
 @Component({
@@ -13,10 +15,9 @@ import { Grocery } from '../grocery';
 })
 export class HomeComponent {
   groceries: any[] = [];
-  editDialogOpen = false;
-  deleteDialogOpen = false;
   editFormData: any = {};
   groceryId!:number;
+  search : String ="";
   constructor(private grocery: Grocery,private dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -34,24 +35,32 @@ export class HomeComponent {
     );
   }
 
+
+
   openEditDialog(groceryId:number,grocery: any) {
     const dialogRef = this.dialog.open(UpdateComponent, {
       width: '400px',
-      data: { grocery,groceryId }
+      data: {id: groceryId,data:grocery }
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.fetchGroceries();
     });
   }
 
-  closeEditDialog(): void {
-    this.editDialogOpen = false;
+
+
+  openDetailsDialog(groceryId:number,grocery:any){
+    const dialogRef = this.dialog.open(DetailsComponent, {
+      width: '400px',
+      data: {id: groceryId,data:grocery }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchGroceries();
+    });
   }
 
-  updateGrocery(): void {
-    this.closeEditDialog();
-    this.fetchGroceries();
-  }
 
   openDeleteDialog(grocery: any) {
     const dialogRef = this.dialog.open(DeleteComponent, {
@@ -74,9 +83,7 @@ export class HomeComponent {
     });
   }
 
-  closeDeleteDialog(): void {
-    this.deleteDialogOpen = false;
-  }
+
 
   openAddDialog(): void {
     const dialogRef = this.dialog.open(AddComponent);
@@ -87,5 +94,7 @@ export class HomeComponent {
       }
     });
   }
+
+
 
 }
