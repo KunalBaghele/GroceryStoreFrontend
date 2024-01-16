@@ -5,6 +5,7 @@ import { UpdateComponent } from '../update/update.component';
 import { AddComponent } from '../add/add.component';
 import { Grocery } from '../grocery';
 import { DetailsComponent } from '../details/details.component';
+import { empty } from 'rxjs';
 
 
 
@@ -15,14 +16,32 @@ import { DetailsComponent } from '../details/details.component';
 })
 export class HomeComponent {
   groceries: any[] = [];
-  editFormData: any = {};
-  groceryId!:number;
-  search : String ="";
-  constructor(private grocery: Grocery,private dialog: MatDialog) {}
+  groceriesByType: any[] = [];
+  groceryId!: number;
+  search: string = "";
+  byType:boolean=false;
+  all:boolean=false;
+  constructor(private grocery: Grocery, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.all=true;
     this.fetchGroceries();
   }
+
+  getGroceryByType(searchText: string) {
+    // console.log(searchText);
+    this.all=false;
+    this.byType=true;
+
+    this.search = searchText;
+    this.grocery.getByType(searchText).subscribe(
+      (data: any) => {
+        this.groceriesByType = data;
+        // console.log(this.groceriesByType);
+      },
+    );
+  }
+
 
   fetchGroceries(): void {
     this.grocery.getGroceries().subscribe(
@@ -37,10 +56,10 @@ export class HomeComponent {
 
 
 
-  openEditDialog(groceryId:number,grocery: any) {
+  openEditDialog(groceryId: number, grocery: any) {
     const dialogRef = this.dialog.open(UpdateComponent, {
       width: '400px',
-      data: {id: groceryId,data:grocery }
+      data: { id: groceryId, data: grocery }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -50,10 +69,10 @@ export class HomeComponent {
 
 
 
-  openDetailsDialog(groceryId:number,grocery:any){
+  openDetailsDialog(groceryId: number, grocery: any) {
     const dialogRef = this.dialog.open(DetailsComponent, {
       width: '400px',
-      data: {id: groceryId,data:grocery }
+      data: { id: groceryId, data: grocery }
     });
 
     dialogRef.afterClosed().subscribe(result => {

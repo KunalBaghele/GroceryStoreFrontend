@@ -15,6 +15,10 @@ export class Grocery {
     return this.http.get<any[]>(`${this.apiUrl}/groceries`);
   }
 
+  getByType(type:string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/groceries/byType?groceryType=${type}`);
+  }
+
   getGroceryById(id:number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/groceries/${id}`);
   }

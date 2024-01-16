@@ -1,10 +1,10 @@
-<mat-card class="example-card">
+<div class="example-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>Grocery Information</mat-card-title><br><br>
 
   </mat-card-header>
-  <mat-card-content>
+  <mat-card-content style="align-self: flex-start;">
     <p>
       <mat-card-subtitle>Grocery Id : {{data.data.groceryId}}</mat-card-subtitle>
       <mat-card-subtitle>Grocery Name : {{data.data.groceryName}}</mat-card-subtitle>
@@ -21,6 +21,6 @@
       <mat-card-subtitle>Source : {{data.data.grocerySource.stateName}}</mat-card-subtitle>
     </p>
   </mat-card-content>
-  <button mat-icon-button color="warn"
+  <button mat-icon-button color="warn" class="center-button"
     (click)="onCancel()"><mat-icon>close</mat-icon></button>
-</mat-card>
+</div>

@@ -2,13 +2,12 @@
 <div class="search">
   <mat-form-field class="example-full-width">
     <span matPrefix> </span>
-    <input type="tel" matInput placeholder="Search" name="search"
-      [(ngModel)]="search">
-    <button matSuffix mat-button><mat-icon>search</mat-icon></button>
+    <input type="text" matInput placeholder="Enter Grocery Type" valur="groceryType" name="search"[(ngModel)]="search" (input)="getGroceryByType(search)">
+    <button matSuffix mat-button (click)="getGroceryByType(search)"><mat-icon>search</mat-icon></button>
   </mat-form-field>
 </div>
 
-<div class="container">
+<div *ngIf="all || search===''" class="container">
   <div *ngFor="let grocery of groceries" class="grocery-card">
     <mat-card>
       <mat-card-title>{{grocery.groceryId}}.{{ grocery.groceryName
@@ -27,6 +26,30 @@
           (click)="openDeleteDialog(grocery)"><mat-icon>delete</mat-icon></button>
         <button mat-icon-button color="accent"
           (click)="openDetailsDialog(grocery.groceryId,grocery)"><mat-icon>visibility</mat-icon></button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<div *ngIf="byType" class="container">
+  <div *ngFor="let item of groceriesByType" class="grocery-card">
+    <mat-card>
+      <mat-card-title>{{item.groceryId}}.{{ item.groceryName
+        }}</mat-card-title><hr>
+      <mat-card-content>
+        <p>Cost Per Item: {{ item.costPerItem }}</p>
+        <p>Items Available: {{ item.groceryAmounts.itemsAvailable }}</p>
+        <!-- <p>Total Cost: {{ grocery.groceryAmounts.totalCostOfItems }}</p> -->
+        <p>Grocery Type: {{ item.groceryType }}</p>
+        <p>Source: {{ item.grocerySource.stateName }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-icon-button color="primary"
+          (click)="openEditDialog(item.groceryId,item)"><mat-icon>update</mat-icon></button>
+        <button mat-icon-button color="warn"
+          (click)="openDeleteDialog(item)"><mat-icon>delete</mat-icon></button>
+        <button mat-icon-button color="accent"
+          (click)="openDetailsDialog(item.groceryId,item)"><mat-icon>visibility</mat-icon></button>
       </mat-card-actions>
     </mat-card>
   </div>

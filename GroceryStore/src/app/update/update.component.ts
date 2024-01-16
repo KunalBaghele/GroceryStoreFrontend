@@ -65,15 +65,6 @@ export class UpdateComponent implements OnInit {
     });
   }
 
-  // setFormData(id: any) {
-  //   this.grocery.getGroceryById(id).subscribe(() => {
-  //     this.inputData = this.data;
-  //     this.editForm.setValue({
-  //       groceryName: this.inputData.groceryName,
-  //     })
-  //   })
-  // }
-
   onSave() {
      this.item=this.editForm.get('groceryAmounts');
      this.src=this.editForm.get('grocerySource');
