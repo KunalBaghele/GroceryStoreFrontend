@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteComponent } from '../delete/delete.component';
 import { UpdateComponent } from '../update/update.component';
 import { AddComponent } from '../add/add.component';
 import { Grocery } from '../grocery';
 import { DetailsComponent } from '../details/details.component';
-import { empty } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 
@@ -14,14 +14,17 @@ import { empty } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   groceries: any[] = [];
   groceriesByType: any[] = [];
   groceryId!: number;
   search: string = "";
   byType:boolean=false;
   all:boolean=false;
-  constructor(private grocery: Grocery, private dialog: MatDialog) { }
+  constructor(private grocery: Grocery, private dialog: MatDialog,private router: Router) {
+    this.all=true;
+    this.fetchGroceries();
+   }
 
   ngOnInit(): void {
     this.all=true;
@@ -32,12 +35,13 @@ export class HomeComponent {
     // console.log(searchText);
     this.all=false;
     this.byType=true;
-
     this.search = searchText;
     this.grocery.getByType(searchText).subscribe(
       (data: any) => {
         this.groceriesByType = data;
+
         // console.log(this.groceriesByType);
+        this.fetchGroceries();
       },
     );
   }
@@ -58,12 +62,13 @@ export class HomeComponent {
 
   openEditDialog(groceryId: number, grocery: any) {
     const dialogRef = this.dialog.open(UpdateComponent, {
-      width: '400px',
       data: { id: groceryId, data: grocery }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.fetchGroceries();
+      this.all=true;
+      this.byType=false;
     });
   }
 
@@ -71,7 +76,6 @@ export class HomeComponent {
 
   openDetailsDialog(groceryId: number, grocery: any) {
     const dialogRef = this.dialog.open(DetailsComponent, {
-      width: '400px',
       data: { id: groceryId, data: grocery }
     });
 
@@ -83,7 +87,6 @@ export class HomeComponent {
 
   openDeleteDialog(grocery: any) {
     const dialogRef = this.dialog.open(DeleteComponent, {
-      width: '400px',
       data: { groceryName: grocery.groceryName }
     });
 
@@ -92,6 +95,8 @@ export class HomeComponent {
         this.grocery.deleteGrocery(grocery.groceryId).subscribe(
           () => {
             console.log('Grocery deleted successfully');
+            this.all=true;
+            this.byType=false;
             this.fetchGroceries();
           },
           (error) => {
@@ -106,14 +111,17 @@ export class HomeComponent {
 
   openAddDialog(): void {
     const dialogRef = this.dialog.open(AddComponent);
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.fetchGroceries();
+        this.all=true;
+        this.byType=false;
       }
     });
   }
 
-
+  logout() {
+    this.router.navigate(['']);
+  }
 
 }

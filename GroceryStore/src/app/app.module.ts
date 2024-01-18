@@ -11,16 +11,17 @@ import { UpdateComponent } from './update/update.component';
 import { DeleteComponent } from './delete/delete.component';
 import { MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { FormsModule, } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { DetailsComponent } from './details/details.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -29,8 +30,8 @@ import { DetailsComponent } from './details/details.component';
     AppComponent, HomeComponent, AddComponent, UpdateComponent, DeleteComponent, NavbarComponent, LoginComponent, DetailsComponent
   ],
   imports: [
-    BrowserModule, MatDialogTitle, MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,ReactiveFormsModule,MatSelectModule,
-    AppRoutingModule, HttpClientModule, BrowserAnimationsModule, MatDialogActions, MatDialogClose, MatDialogContent,MatInputModule,MatIconModule
+    BrowserModule, MatDialogTitle, MatButtonModule, MatCardModule, FormsModule, MatFormFieldModule, ReactiveFormsModule, MatSelectModule, MatSnackBarModule,
+    AppRoutingModule, HttpClientModule, BrowserAnimationsModule, MatDialogActions, MatDialogClose, MatDialogContent, MatInputModule, MatIconModule
   ],
   providers: [
     provideClientHydration(),

@@ -1,19 +1,24 @@
-<button mat-raised-button color="primary" (click)="openAddDialog()">Add Grocery</button>
+
+<div class="home">
+<button mat-raised-button color="primary" (click)="openAddDialog()"><mat-icon>add</mat-icon>Add Grocery</button>
 <div class="search">
   <mat-form-field class="example-full-width">
     <span matPrefix> </span>
     <input type="text" matInput placeholder="Enter Grocery Type" valur="groceryType" name="search"[(ngModel)]="search" (input)="getGroceryByType(search)">
     <button matSuffix mat-button (click)="getGroceryByType(search)"><mat-icon>search</mat-icon></button>
   </mat-form-field>
+
+  <mat-icon class="logout-icon" (click)="logout()">exit_to_app</mat-icon>
+
 </div>
 
 <div *ngIf="all" class="container">
   <div *ngFor="let grocery of groceries" class="grocery-card">
     <mat-card>
-      <mat-card-title>{{grocery.groceryId}}.{{ grocery.groceryName
-        }}</mat-card-title><hr>
+      <mat-icon> fastfood</mat-icon>
+      <mat-card-title>{{ grocery.groceryName }}</mat-card-title><hr>
       <mat-card-content>
-        <p>Cost Per Item: {{ grocery.costPerItem }}</p>
+        <p>Cost Per Item: &#8377;{{ grocery.costPerItem }}</p>
         <p>Items Available: {{ grocery.groceryAmounts.itemsAvailable }}</p>
         <!-- <p>Total Cost: {{ grocery.groceryAmounts.totalCostOfItems }}</p> -->
         <p>Grocery Type: {{ grocery.groceryType }}</p>
@@ -21,7 +26,7 @@
       </mat-card-content>
       <mat-card-actions>
         <button mat-icon-button color="primary"
-          (click)="openEditDialog(grocery.groceryId,grocery)"><mat-icon>update</mat-icon></button>
+          (click)="openEditDialog(grocery.groceryId,grocery)"><mat-icon>edit</mat-icon></button>
         <button mat-icon-button color="warn"
           (click)="openDeleteDialog(grocery)"><mat-icon>delete</mat-icon></button>
         <button mat-icon-button color="accent"
@@ -34,10 +39,10 @@
 <div *ngIf="byType" class="container">
   <div *ngFor="let item of groceriesByType" class="grocery-card">
     <mat-card>
-      <mat-card-title>{{item.groceryId}}.{{ item.groceryName
-        }}</mat-card-title><hr>
+      <mat-icon> fastfood</mat-icon>
+      <mat-card-title>{{ item.groceryName }}</mat-card-title><hr>
       <mat-card-content>
-        <p>Cost Per Item: {{ item.costPerItem }}</p>
+        <p>Cost Per Item: &#8377;{{ item.costPerItem }} </p>
         <p>Items Available: {{ item.groceryAmounts.itemsAvailable }}</p>
         <!-- <p>Total Cost: {{ grocery.groceryAmounts.totalCostOfItems }}</p> -->
         <p>Grocery Type: {{ item.groceryType }}</p>
@@ -53,4 +58,6 @@
       </mat-card-actions>
     </mat-card>
   </div>
+</div>
+
 </div>

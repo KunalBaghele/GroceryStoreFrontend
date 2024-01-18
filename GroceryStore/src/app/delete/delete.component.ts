@@ -17,4 +17,5 @@ export class DeleteComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
 }

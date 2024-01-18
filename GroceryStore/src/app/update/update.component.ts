@@ -68,13 +68,13 @@ export class UpdateComponent implements OnInit {
   onSave() {
      this.item=this.editForm.get('groceryAmounts');
      this.src=this.editForm.get('grocerySource');
+
     if (this.editForm && this.editForm.valid) {
       const updatedGroceryData = {
         groceryName: this.editForm.value.groceryName,
         costPerItem: this.editForm.value.costPerItem,
         groceryType: this.editForm.value.groceryType,
         groceryAmounts: {
-
           itemsAvailable: this.item.value.itemsAvailable,
         },
         grocerySource: {
@@ -86,7 +86,8 @@ export class UpdateComponent implements OnInit {
           this.dialogRef.close(true);
           this.grocery.getGroceries();
         });
-      } else {
+      }
+      else {
         console.error('Invalid ID:', this.data.id);
       }
     }

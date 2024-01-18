@@ -50,7 +50,7 @@ export class AddComponent implements OnInit {
     if (this.groceryForm.valid) {
       this.grocery.addGrocery(this.groceryForm.value).subscribe(
         () => {
-          console.log('Grocery added successfully');
+          // console.log('Grocery added successfully');
           this.dialogRef.close(true);
         },
         (error) => {

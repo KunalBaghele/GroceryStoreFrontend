@@ -1,13 +1,14 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Grocery } from '../grocery';
+import { Init } from 'v8';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<DetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -15,7 +16,7 @@ export class DetailsComponent {
   ) { }
   ngOnInit() {
     this.grocery.getGroceryById(this.data.id).subscribe(() => {
-      console.log(this.data);
+      // console.log(this.data);
 
     });
   }
