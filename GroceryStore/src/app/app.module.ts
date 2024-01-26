@@ -22,16 +22,23 @@ import { LoginComponent } from './login/login.component';
 import { MatIconModule } from '@angular/material/icon';
 import { DetailsComponent } from './details/details.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { ViewprofileComponent } from './viewprofile/viewprofile.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, AddComponent, UpdateComponent, DeleteComponent, NavbarComponent, LoginComponent, DetailsComponent
+    AppComponent, HomeComponent, AddComponent, UpdateComponent, DeleteComponent, NavbarComponent, LoginComponent, DetailsComponent, ViewprofileComponent
   ],
   imports: [
-    BrowserModule, MatDialogTitle, MatButtonModule, MatCardModule, FormsModule, MatFormFieldModule, ReactiveFormsModule, MatSelectModule, MatSnackBarModule,
-    AppRoutingModule, HttpClientModule, BrowserAnimationsModule, MatDialogActions, MatDialogClose, MatDialogContent, MatInputModule, MatIconModule
+    BrowserModule, MatDialogTitle, MatButtonModule, MatCardModule, FormsModule,
+    MatFormFieldModule, ReactiveFormsModule, MatSelectModule, MatSnackBarModule,
+    AppRoutingModule, HttpClientModule, BrowserAnimationsModule, MatDialogActions,
+    MatDialogClose, MatDialogContent, MatInputModule, MatIconModule, MatPaginatorModule,
+    MatSortModule, MatTableModule,
+    HttpClientModule,
   ],
   providers: [
     provideClientHydration(),

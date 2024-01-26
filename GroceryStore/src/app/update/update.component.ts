@@ -84,7 +84,7 @@ export class UpdateComponent implements OnInit {
       if (this.data.id) {
         this.grocery.updateGrocery(this.data.id, updatedGroceryData).subscribe(() => {
           this.dialogRef.close(true);
-          this.grocery.getGroceries();
+          this.fetchGroceries();
         });
       }
       else {

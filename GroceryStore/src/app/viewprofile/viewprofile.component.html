@@ -1,0 +1,17 @@
+<div class="example-card" *ngIf="currentUser">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title><h1>Your Profile</h1></mat-card-title><br><br>
+
+  </mat-card-header>
+  <mat-card-content style="align-self: flex-start;">
+    <p>
+      <mat-card-subtitle>Admin Id : {{currentUser.adminId}}</mat-card-subtitle><br>
+      <mat-card-subtitle>First Name : {{currentUser.fname}}</mat-card-subtitle><br>
+      <mat-card-subtitle>Last Name : {{currentUser.lname}}</mat-card-subtitle><br>
+      <mat-card-subtitle>Mobile : {{currentUser.mobile}}</mat-card-subtitle><br>
+      <mat-card-subtitle>Email : {{currentUser.email}}</mat-card-subtitle><br>
+    </p>
+  </mat-card-content>
+  <button mat-icon-button color="warn" class="center-button" (click)="onCancel()"><mat-icon>close</mat-icon></button>
+</div>

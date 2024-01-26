@@ -2,31 +2,31 @@
 <h2 mat-dialog-title>Add Grocery</h2>
 <div mat-dialog-content>
   <form [formGroup]="groceryForm">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Grocery Name</mat-label>
       <input matInput formControlName="groceryName" placeholder="Grocery Name">
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Cost Per Item</mat-label>
       <input matInput formControlName="costPerItem" placeholder="Cost Per Item">
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Grocery Type</mat-label>
       <input matInput formControlName="groceryType" placeholder="Grocery Type">
     </mat-form-field>
 
-    <form [formGroup]="groceryAmounts">
-      <mat-form-field>
+    <div [formGroup]="groceryAmounts">
+      <mat-form-field appearance="outline">
         <mat-label>Items Available</mat-label>
         <input matInput formControlName="itemsAvailable"
           placeholder="Items Available">
       </mat-form-field>
-    </form>
+    </div>
 
-    <form [formGroup]="grocerySource">
-      <mat-form-field>
+    <div [formGroup]="grocerySource">
+      <mat-form-field appearance="outline">
         <mat-label>Select State</mat-label>
         <mat-select formControlName="stateName" placeholder="State">
           <mat-option *ngFor="let state of states" [value]="state.stateName">
@@ -34,7 +34,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </form>
+    </div>
 
   </form>
 </div>
